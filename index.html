@@ -225,6 +225,20 @@ if(!SUPABASE_NOT_CONFIGURED){
   }catch(e){ console.error('Supabase init failed', e); }
 }
 
+// Optional: Google Analytics for detailed visitor info (location, device, pages viewed).
+// Get a free Measurement ID at analytics.google.com, then paste it below.
+const GA_MEASUREMENT_ID = "G-GVDHQ3JC3P"; // looks like G-XXXXXXXXXX
+if(GA_MEASUREMENT_ID.indexOf('PASTE_') !== 0){
+  const gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+  document.head.appendChild(gaScript);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', GA_MEASUREMENT_ID);
+}
+
 /* ---------- config ---------- */
 const MAX_FILE_BYTES = 20 * 1024 * 1024; // 20 MB per uploaded file
 const CAT_CODE = {
